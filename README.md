@@ -9,15 +9,16 @@
 - [Technologies](#technologies)
 - [Model Schema](#Model-Schema)
 - [Features](#features)
-- [Contributing](#contributing)
 - [Team](#team)
 - [Todo](#Todo)
 
 ## Technologies
 - Back End
   - Express
+  - Node.js
 - Front End
   - Pug
+  - JavaScript
 
 
 ## Model Schema
@@ -27,7 +28,7 @@
 
 ### Create/Delete Bookshelves
 ***
-An event is registered when a user clicks the `add` bookshelf button. The name of the custom bookshelf is collected in the `formData` object and sent in the body of the post request to `/api-user/shelves`. The `overlay` div is displayed upon a set timeout of 3 seconds accompanied by a smooth transition duration for a better user visual experience. 
+An event is registered when a user clicks the `add` bookshelf button. The name of the custom bookshelf is collected in the `formData` object and sent in the body of the post request to `/api-user/shelves`. The `overlay` div is displayed upon a set timeout of 3 seconds accompanied by a smooth transition duration for a better user visual experience.
 
 ```js
 // get-bookshelf-list.js
@@ -88,7 +89,7 @@ try {
 
 ### Add Books to Custom Bookshelf
 ***
-Books can be added to bookshelves two ways: the dropdown from `/user/shelves` page where the bookshelves are located, or the books details page (`/books/:bookId`) after searching for a particular book. It's important to highlight that books can not appear multiple times on the same bookshelf. This is ensured by doing a query in the Back End `/api-user/excluded-shelves/books/:bookid` route for the bookshelf dropdown select field that filters out bookshelves the books already belongs to. 
+Books can be added to bookshelves two ways: the dropdown from `/user/shelves` page where the bookshelves are located, or the books details page (`/books/:bookId`) after searching for a particular book. It's important to highlight that books can not appear multiple times on the same bookshelf. This is ensured by doing a query in the Back End `/api-user/excluded-shelves/books/:bookid` route for the bookshelf dropdown select field that filters out bookshelves the books already belongs to.
 
 ```js
 // api-user.js file
@@ -136,12 +137,12 @@ Books can be added to bookshelves two ways: the dropdown from `/user/shelves` pa
     //return as an obj containing the filtered array of objects
     res.json({ allShelvesWithoutBook });
 ```
-Note: 
-  - All the shelves for the user are found first. Then the list of shelves with the book included. That list is then converted to id's which is easier to manage later opposed to the shelf object from the db. The array of id's are then used to filter out all of the bookshelves that include that id by cross referencing them with the original query of all the user bookshelves. 
+Note:
+  - All the shelves for the user are found first. Then the list of shelves with the book included. That list is then converted to id's which is easier to manage later opposed to the shelf object from the db. The array of id's are then used to filter out all of the bookshelves that include that id by cross referencing them with the original query of all the user bookshelves.
 
 ### Search Feature
 ***
-The Front End `/books` route handles the search feature. The navbar encompases the form: 
+The Front End `/books` route handles the search feature. The navbar encompases the form:
 
 ```pug
   //- navbar.pug file
@@ -151,7 +152,7 @@ form(action="/books" method="GET" class='navbar__search')
   button(type="submit" class="button-dark") discover
 ```
 
-The API to route `/books`, which accepts a `GET` req with the search term interpolated in the url, gets extracted. The search term is then use to query all book resources in the db that house the search term in it's title, case insensitive ofcourse. 
+The API to route `/books`, which accepts a `GET` req with the search term interpolated in the url, gets extracted. The search term is then use to query all book resources in the db that house the search term in it's title, case insensitive ofcourse.
 
 ```js
 router.get('/', asyncHandler(async (req, res) => {
@@ -182,8 +183,8 @@ router.get('/', asyncHandler(async (req, res) => {
 
 }))
 ```
-Note: 
-  - The conditional logic for the search term also returns all books in the db if no search term is entered in the form when the user presses enter. 
+Note:
+  - The conditional logic for the search term also returns all books in the db if no search term is entered in the form when the user presses enter.
 
 ### Add Reviews to Books
 ***
@@ -197,15 +198,15 @@ The pug file renders all the reviews upon page load, but the added review is add
   div.container__all-reviews
     each review in book.Reviews
         div(class='container__reviews')
-            //- length is checked for ellipses purposes 
-            if review.description.length > 260 
+            //- length is checked for ellipses purposes
+            if review.description.length > 260
                 div(class='container__reviews___star')
                         p(class='container__reviews__text') #{review.description.slice(0, 250)}
                             span(class='ellipses') ...
                             span(class='readmore-text hide') #{review.description.slice(250)}
                 div(class='container__reviews__text')
                     p(class='container__reviews__readmore') readmore
-            else 
+            else
                 div(class='container__reviews___star')
                     p(class='container__reviews__text') #{review.description}
 ```
@@ -275,10 +276,10 @@ const addNewReview = (review) => {
 }
 
 ```
-Note: 
-  - Duplicates are avoided by clearing out the reviews upon page refresh and upon entering of the newly created review. 
+Note:
+  - Duplicates are avoided by clearing out the reviews upon page refresh and upon entering of the newly created review.
 
-  - The reviews also have a `readmore` / `readless` ellipses button that gets added to the DOM if the review is longer than 250 characters utlizing the `slice` method. When the `readmore` button is clicked, the rest of the sliced review is displayed. If the `readless` button is clicked, the rest of the slice review is hidden and the ellipses (`...`) is appended. 
+  - The reviews also have a `readmore` / `readless` ellipses button that gets added to the DOM if the review is longer than 250 characters utlizing the `slice` method. When the `readmore` button is clicked, the rest of the sliced review is displayed. If the `readless` button is clicked, the rest of the slice review is hidden and the ellipses (`...`) is appended.
 
 ---
 
@@ -289,4 +290,3 @@ Note:
 |:---:|:---:|:---:|:---:|
 | [![Quynn Smith](https://avatars2.githubusercontent.com/u/31673566?s=138&u=8bb0cab66020f684771e32addc9a76c22f3e17cb&v=4)](https://github.com/qsmity) | <a href="https://avatars0.githubusercontent.com/u/16943507?s=200&v=4" target="_blank"><img src="https://avatars0.githubusercontent.com/u/16943507?s=200&v=4" alt="remaley5" width="138" height="138" /></a> | [![TJ Taylor](https://avatars3.githubusercontent.com/u/62177226?s=138&u=034c0f894dd93f9eb2ed8e43e3172ed83d19a9cc&v=4)](https://github.com/tjtaylorjr) | [![Tom Xu](https://avatars2.githubusercontent.com/u/62292177?s=138&u=f3954ecc585c9e882be86ec184c159720ef1951f&v=4)](https://github.com/xxl4tomxu98) |
 | <a href="http://github.com/qsmity" target="_blank">`github.com/qsmity`</a> | <a href="https://github.com/remaley5" target="_blank">`github.com/remaley5`</a> | <a href="http://github.com/tjtaylorjr" target="_blank">`github.com/tjtaylorjr`</a> | <a href="http://github.com/xxl4tomxu98" target="_blank">`github.com/xxl4tomxu98`</a> |
-
