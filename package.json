@@ -1,7 +1,7 @@
 {
   "name": "badreads",
   "version": "1.0.0",
-  "description": "A site built using Goodreads as a model",
+  "description": "A Goodreads clone site",
   "main": "./bin/www",
   "scripts": {
     "start": "per-env",
@@ -37,10 +37,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tjtaylorjr/goodreads-clone.git"
+    "url": "git+https://github.com/tjtaylorjr/badreads.git"
   },
   "bugs": {
-    "url": "https://github.com/tjtaylorjr/goodreads-clone/issues"
+    "url": "https://github.com/tjtaylorjr/badreads/issues"
   },
-  "homepage": "https://github.com/tjtaylorjr/goodreads-clone#readme"
+  "homepage": "https://github.com/tjtaylorjr/badreads#readme"
 }
