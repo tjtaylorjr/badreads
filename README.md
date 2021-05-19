@@ -1,4 +1,4 @@
-[Live Link](https://shouldreads-app.herokuapp.com/)
+[Live Link](https://badreads-app.herokuapp.com/)
 
 ![BadReads](readmeImages/BadReads.gif)
 
